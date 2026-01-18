@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ащищенный обмен данными.cpp">
+    <ClCompile Include="Защищенный обмен данными.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
