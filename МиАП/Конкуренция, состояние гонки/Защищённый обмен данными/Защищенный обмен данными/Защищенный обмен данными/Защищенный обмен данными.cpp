@@ -29,7 +29,7 @@ public:
     }
 };
 
-// Вариант 1: через lock() с adopt_lock (ваш исходный вариант - правильный)
+// Вариант 1:
 void swap1(Data& a, Data& b) {
     lock(a.getMutex(), b.getMutex());
     lock_guard<mutex> lockA(a.getMutex(), adopt_lock);
@@ -37,13 +37,13 @@ void swap1(Data& a, Data& b) {
     a.swapValues(b);
 }
 
-// Вариант 2: через scoped_lock (C++17) - добавляем по заданию
+// Вариант 2: 
 void swap2(Data& a, Data& b) {
     scoped_lock lockBoth(a.getMutex(), b.getMutex());
     a.swapValues(b);
 }
 
-// Вариант 3: через unique_lock с defer_lock (ваш исходный вариант - правильный)
+// Вариант 3:
 void swap3(Data& a, Data& b) {
     unique_lock<mutex> lockA(a.getMutex(), defer_lock);
     unique_lock<mutex> lockB(b.getMutex(), defer_lock);
@@ -60,25 +60,23 @@ int main() {
     cout << "data1 = " << data1.getValue() << "\n";
     cout << "data2 = " << data2.getValue() << "\n";
 
-    // Тестируем swap1 (lock + lock_guard)
+    // Тестируем swap1 
     swap1(data1, data2);
     cout << "\nПосле swap1 (lock + lock_guard):\n";
     cout << "data1 = " << data1.getValue() << "\n";
     cout << "data2 = " << data2.getValue() << "\n";
 
-    // Возвращаем исходные значения
     swap1(data1, data2);
 
-    // Тестируем swap2 (scoped_lock)
+    // Тестируем swap2 
     swap2(data1, data2);
     cout << "\nПосле swap2 (scoped_lock):\n";
     cout << "data1 = " << data1.getValue() << "\n";
     cout << "data2 = " << data2.getValue() << "\n";
 
-    // Возвращаем исходные значения
     swap2(data1, data2);
 
-    // Тестируем swap3 (unique_lock)
+    // Тестируем swap3 
     swap3(data1, data2);
     cout << "\nПосле swap3 (unique_lock):\n";
     cout << "data1 = " << data1.getValue() << "\n";
