@@ -1,0 +1,14 @@
+FROM ubuntu:20.04
+
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    clang \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY Calculator.cpp /app/
+
+RUN clang++ -std=c++11 -o calculator-clang Calculator.cpp
+
+CMD ["./calculator-clang"]

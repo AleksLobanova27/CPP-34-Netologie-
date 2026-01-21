@@ -1,0 +1,15 @@
+FROM ubuntu:20.04
+
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    g++ \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY Calculator.cpp /app/
+
+RUN g++ -std=c++11 -o calculator-gcc Calculator.cpp
+
+CMD ["./calculator-gcc"]
