@@ -100,13 +100,13 @@ int main() {
     logger.addObserver(&error_observer);
     logger.addObserver(&fatal_observer);
 
-    cout << "=== Тестирование системы логирования ===" << endl;
+    cout << "Тестирование системы логирования:" << endl;
 
     logger.warning("Обнаружено устаревшее API");
     logger.error("Не удалось открыть файл конфигурации");
     logger.fatalError("Нарушение целостности памяти");
 
-    cout << "\n=== После удаления наблюдателя предупреждений ===" << endl;
+    cout << "\nПосле удаления наблюдателя предупреждений:" << endl;
     logger.removeObserver(&warning_observer);
 
     logger.warning("Это предупреждение никто не увидит");
